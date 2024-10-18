@@ -1,0 +1,93 @@
+#!/bin/bash
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+#                                                                    MICKAEL - MONTAGE D'UN MEMO BASH - 10/10/2024 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+echo ""
+echo ""
+
+Num=0 ; Num2=0 ; Num3=0;
+Header="                      FONCTIONS :                                                       SYNTHAXE :                                          REMARQUES : " 
+nl=""
+sep="--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+IS(){ 
+    ((Num++))
+    printf "%02d) %s\n" "$Num" "$1"  # Ajoute un zéro devant les chiffres de 1 à 9
+}
+
+IM(){
+    ((Num2++))
+    printf "%02d) %s\n" "$Num2" "$1"  # Ajoute un zéro devant les chiffres de 1 à 9
+}
+
+IG(){
+    ((Num3++))
+    printf "%02d) %s\n" "$Num3" "$1"  # Ajoute un zéro devant les chiffres de 1 à 9
+}
+
+# Fonction pour centrer mes en-têtes
+Centrer() { 
+    local Argu="$1"
+    local taille_sep=${#sep}
+    local taille_argu=${#Argu}
+    local delta=$(( (taille_sep - taille_argu) / 2 ))
+    
+    # Créer le delta et afficher le Argue centré
+    printf "%*s%s%*s\n" $delta "" "$Argu" $delta ""
+}
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+#                                                                         DEBUT DU MONTAGE ET DU RETOUR 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+
+Centrer "* MEMO DES COMMANDES UTILES - MICKAEL - 10/10/24 *"
+echo "$nl"
+echo "$sep"
+Centrer "INFORMATIONS SYSTEME"
+echo "$sep"
+echo "$Header"
+echo "$nl"
+
+IS "ETAT du système et processus en temps réel :                  | htop                                               | Initialement top mais htop plus convivial"   
+IS "ETAT de mon espace disque utilisé et disponible :             | df -h                                              |"
+IS "LISTER tous les paquets installés :                           | dpkg --list                                        |"                                    
+IS "RECHERCHER un paquet contenant un motif :                     | dpkg --list | grep <motif>                         |"
+
+echo "$nl"
+echo "$sep"
+Centrer "MANIPULATION STRING (chercher, remplacer, compter) ET OPERATEURS DE CONDITIONS BASH"
+echo "$sep"
+echo "$nl"
+
+IM "RECHERCHER ET REMPLACER un Argu dans un fichier :             | sed 's/ancien/nouveau/g' fichier.txt               |"
+IM "VERIFIER SI UN FICHIER EXISTE ET EST REGULIER :               | [ -f '\$filename' ]                                 | -f : Renvoie true si le fichier existe et est régulier."
+IM "VERIFIER SI UN FICHIER EST VIDE :                             | [ -s '\$filename' ]                                 | -s : Renvoie true si le fichier existe et n'est pas vide."
+IM "VERIFIER SI UNE CHAINE EST VIDE :                             | [ -z '\$str' ]                                      | -z : Renvoie true si la chaîne est vide."
+IM "VERIFIER SI UNE CHAINE N'EST PAS VIDE :                       | [ -n '\$str' ]                                      | -n : Renvoie true si la chaîne n'est pas vide."
+IM "VERIFIER SI DEUX CHAINES SONT EGALLES :                       | [ '\$str1' = '\$str2' ]                              | = : Renvoie true si les chaînes sont identiques."
+IM "VERIFIER SI DEUX NOMBRES SONT EGAUX :                         | [ '\$num1' -eq '\$num2' ]                            | -eq : Renvoie true si les nombres sont égaux."
+IM "VERIFIER SI UN NOMBRE EST SUPERIEUR A UN AUTRE :              | [ '\$num1' -gt '\$num2' ]                            | -gt : Renvoie true si \$num1 est supérieur à \$num2."
+IM "VERIFIER SI UN NOMBRE EST INFERIEUR OU EGAL A UN AUTRE :      | [ '\$num1' -le '\$num2' ]                            | -le : Renvoie true si \$num1 est inférieur ou égal à \$num2."
+IM "VERIFIER SI UN NOMBRE EST INFERIEUR A UN AUTRE :              | [ '\$num1' -lt '\$num2' ]                            | -lt : Renvoie true si \$num1 est inférieur à \$num2."
+IM "VERIFIER SI UN NOMBRE EST SUPERIEUR OU EGAL A UN AUTRE :      | [ '\$num1' -ge '\$num2' ]                            | -ge : Renvoie true si \$num1 est supérieur ou égal à \$num2."
+IM "VERIFIER SI DEUX NOMBRES NE SONT PAS EGAUX :                  | [ '\$num1' -ne '\$num2' ]                            | -ne : Renvoie true si les nombres ne sont pas égaux."
+
+echo "$nl"
+echo "$sep"
+Centrer "COMMANDES RELATIVES A GIT ET GITHUB - PROJETS COLLABORATIFS "
+echo "$sep"
+echo "$nl"
+
+IG "CLONER mon projet GITHUB  :                                   | git clone https://github.com/nom_util/nom_dépôt.git| Remplacer nom_util et nom_depot par nos infos"
+IG "ACCEDER à mon rep/fichier    :                                | cd nom_du_dépôt cd nom_projet                      | "
+IG "AJOUTER à l'index de fichier :                                | git add nomdufichier                               | Pour ajouter tous les fichiers modifiés add ."
+IG "AJOUTER un commit :                                           | git commit -m  'le message'                        | mettre un label aux modifications."
+IG "VERIFIER le status des modifications                          | git status                                         | Préalable au push sur la main branch."
+IG "POUSSER les modifications :                                   | git push origin main                               | origin : nom du dépot ; main : branche."
+IG "RECUPERER les modifications :                                 | git pull origin main                               | Recupère les modifs du dépot distant." 
+IG "RESTAURER la dernière version gitHub du fichier:              | git checkout -- nomdufichier                       | Annule les changements du fichier local."
+IG "RESTAURER la dernière version gitHub du dépot :               | git reset --hard origin/main                       | Annule les changements du fichier local."
+IG "HISTORIQUE consulter l'historique des commits :               | git log -n <nombres a afficher>                    | -p (différences) --author='Nom' --since='2 weeks ago'"
+
+echo "$nl"
+
